@@ -93,7 +93,7 @@ int main()
     /* Printing the measured times: */
     printf("\nCubic: average time is %f\n",avgCubic);
     printf("Reno: average time is %f\n",avgReno);
-    
+
 //=============================================================================================
     /* Closing the connection: */
     close(listeningSocket);
@@ -142,7 +142,6 @@ double recive_file_5_times(int listeningSocket)
         t1 = clock();
         get_file(new_sock);
         t2 = clock();
-        // time_spent = end - start
         float diff = ((float)(t2 - t1) / 10000.0F);
         printf("File recived in %f seconds\n", diff);
         sumTimes += diff;
