@@ -1,4 +1,10 @@
-//
+/****************************************************************************
+* Eyal Levi ID.203249073
+* Assignment number 3
+* TCP Sockets and Congestion Control
+* Ariel University 2020
+****************************************************************************/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -75,17 +81,11 @@ int main()
 //=============================================================================================
     /* Reciveing the file 5 times and measuring: */
     double sumTimes = recive_file_5_times(listeningSocket);
-
-//=============================================================================================
-    /* Averaging the measured times: */
     double avgCubic = sumTimes/5;
 
 //=============================================================================================
     /* Reciveing the file 5 times and measuring: */
     sumTimes = recive_file_5_times(listeningSocket);
-
-//=============================================================================================
-    /* Averaging the measured times: */
     double avgReno = sumTimes/5;
 
 //=============================================================================================
@@ -97,7 +97,6 @@ int main()
     close(listeningSocket);
     return 0;
 }
-
 
 
 void get_file(int sockfd)
@@ -136,9 +135,6 @@ double recive_file_5_times(int listeningSocket)
             close(listeningSocket);
             exit(0);
         }
-        // } else {
-        //     printf("A new client connection accepted\n");
-        // }
 
         clock_t t1, t2;
         t1 = clock();
