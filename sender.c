@@ -17,8 +17,9 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
+#include<time.h>
 
-#define SERVER_PORT 5066
+#define SERVER_PORT 5067
 #define SIZE 2000
 #define SERVER_IP_ADDRESS "127.0.0.1"
 char buffer[SIZE];
@@ -58,13 +59,12 @@ void send_5_times(char* op){
         strcpy(buffer, op);
         length = sizeof(buffer);
         int set_sock_opt = setsockopt(sock, IPPROTO_TCP, TCP_CONGESTION, buffer, length);
-        printf("CC algorithm: %s\n", buffer);
+        printf("CC algorithm: %s\t", buffer);
         if(set_sock_opt !=0 )
         {
             perror("setsockopt");
             exit(EXIT_FAILURE); // failing exit status.
         }
-        printf("\n================================== \n");
 
     //==================================================================
         /* Creating connection with Measure.c */
@@ -84,9 +84,6 @@ void send_5_times(char* op){
             fprintf(stderr, "connect() failed with error code --> %s\n", strerror(errno));
             exit(EXIT_FAILURE); // failing exit status.
         } 
-        else {
-            printf("connected to server!\n");
-        }
 
     //==================================================================
         /* Sending the file 5 times: */
@@ -116,7 +113,7 @@ void send_file(FILE *fp, int sockfd)
     {
         size += send(sockfd, buffer, data_stream, 0);
     }
-    printf("Bytes sent: %d\n", size);
+    printf("File '1mb.txt' sent\n");
 }
 //*********************************************************************************************************
 

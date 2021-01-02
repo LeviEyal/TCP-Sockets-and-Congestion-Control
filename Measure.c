@@ -17,7 +17,7 @@
 #include <signal.h>
 #include<time.h>
 
-#define SERVER_PORT 5066 //The port that the server listens
+#define SERVER_PORT 5067 //The port that the server listens
 #define SIZE 1024
 
 void get_file(int sockfd);
@@ -138,12 +138,12 @@ double recive_file_5_times(int listeningSocket)
             exit(0);
         }
 
-        clock_t t1, t2;
-        t1 = clock();
+        struct timespec t1, t2;
+        clock_gettime(CLOCK_REALTIME, &t1);
         get_file(new_sock);
-        t2 = clock();
-        float diff = ((float)(t2 - t1) / 10000.0F);
-        printf("File recived in %f seconds\n", diff);
+        clock_gettime(CLOCK_REALTIME, &t2);
+        double diff = (t2.tv_sec - t1.tv_sec) + (t2.tv_nsec - t1.tv_nsec) / 1000000000.0;
+        printf("File recived in %lf seconds\n", diff);
         sumTimes += diff;
         sleep(1);
     }
