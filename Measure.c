@@ -104,16 +104,12 @@ int main()
 void get_file(int sockfd)
 {
     int n = -1;
-    FILE *fp;
     char buffer[SIZE];
 
-    fp = fopen("recv.txt", "w+");
     while(n = recv(sockfd, buffer, SIZE, 0) != 0)
     {
-        fputs(buffer, fp);
         bzero(buffer, SIZE);
     }
-    fclose(fp);
     return;
 }
 
